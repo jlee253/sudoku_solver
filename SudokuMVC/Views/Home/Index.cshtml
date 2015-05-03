@@ -1,0 +1,252 @@
+﻿@{
+    ViewBag.Title = "Sudoku Home Page";
+}
+
+<!--
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+-->
+<div class="row">
+    <h1>SudokuSolver!</h1>
+    <p class="lead">An online utility that will solve a sudoku puzzle for you!</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6" style="">
+        <table class="">
+            <tr>
+                <td id="sc00" class="sudokuCell sudokuTop sudokuLeft"></td>
+                <td id="sc10" class="sudokuCell sudokuTop"></td>
+                <td id="sc20" class="sudokuCell sudokuTop sudokuRight"></td>
+                <td id="sc30" class="sudokuCell sudokuTop"></td>
+                <td id="sc40" class="sudokuCell sudokuTop"></td>
+                <td id="sc50" class="sudokuCell sudokuTop sudokuRight"></td>
+                <td id="sc60" class="sudokuCell sudokuTop"></td>
+                <td id="sc70" class="sudokuCell sudokuTop"></td>
+                <td id="sc80" class="sudokuCell sudokuTop sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc01" class="sudokuCell sudokuLeft"></td>
+                <td id="sc11" class="sudokuCell"></td>
+                <td id="sc21" class="sudokuCell sudokuRight"></td>
+                <td id="sc31" class="sudokuCell"></td>
+                <td id="sc41" class="sudokuCell"></td>
+                <td id="sc51" class="sudokuCell sudokuRight"></td>
+                <td id="sc61" class="sudokuCell"></td>
+                <td id="sc71" class="sudokuCell"></td>
+                <td id="sc81" class="sudokuCell sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc02" class="sudokuCell sudokuLeft"></td>
+                <td id="sc12" class="sudokuCell"></td>
+                <td id="sc22" class="sudokuCell sudokuRight"></td>
+                <td id="sc32" class="sudokuCell"></td>
+                <td id="sc42" class="sudokuCell"></td>
+                <td id="sc52" class="sudokuCell sudokuRight"></td>
+                <td id="sc62" class="sudokuCell"></td>
+                <td id="sc72" class="sudokuCell"></td>
+                <td id="sc82" class="sudokuCell sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc03" class="sudokuCell sudokuTop sudokuLeft"></td>
+                <td id="sc13" class="sudokuCell sudokuTop"></td>
+                <td id="sc23" class="sudokuCell sudokuTop sudokuRight"></td>
+                <td id="sc33" class="sudokuCell sudokuTop"></td>
+                <td id="sc43" class="sudokuCell sudokuTop"></td>
+                <td id="sc53" class="sudokuCell sudokuTop sudokuRight"></td>
+                <td id="sc63" class="sudokuCell sudokuTop"></td>
+                <td id="sc73" class="sudokuCell sudokuTop"></td>
+                <td id="sc83" class="sudokuCell sudokuTop sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc04" class="sudokuCell sudokuLeft"></td>
+                <td id="sc14" class="sudokuCell"></td>
+                <td id="sc24" class="sudokuCell sudokuRight"></td>
+                <td id="sc34" class="sudokuCell"></td>
+                <td id="sc44" class="sudokuCell"></td>
+                <td id="sc54" class="sudokuCell sudokuRight"></td>
+                <td id="sc64" class="sudokuCell"></td>
+                <td id="sc74" class="sudokuCell"></td>
+                <td id="sc84" class="sudokuCell sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc05" class="sudokuCell sudokuLeft"></td>
+                <td id="sc15" class="sudokuCell"></td>
+                <td id="sc25" class="sudokuCell sudokuRight"></td>
+                <td id="sc35" class="sudokuCell"></td>
+                <td id="sc45" class="sudokuCell"></td>
+                <td id="sc55" class="sudokuCell sudokuRight"></td>
+                <td id="sc65" class="sudokuCell"></td>
+                <td id="sc75" class="sudokuCell"></td>
+                <td id="sc85" class="sudokuCell sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc06" class="sudokuCell sudokuTop sudokuLeft"></td>
+                <td id="sc16" class="sudokuCell sudokuTop"></td>
+                <td id="sc26" class="sudokuCell sudokuTop sudokuRight"></td>
+                <td id="sc36" class="sudokuCell sudokuTop"></td>
+                <td id="sc46" class="sudokuCell sudokuTop"></td>
+                <td id="sc56" class="sudokuCell sudokuTop sudokuRight"></td>
+                <td id="sc66" class="sudokuCell sudokuTop"></td>
+                <td id="sc76" class="sudokuCell sudokuTop"></td>
+                <td id="sc86" class="sudokuCell sudokuTop sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc07" class="sudokuCell sudokuLeft"></td>
+                <td id="sc17" class="sudokuCell"></td>
+                <td id="sc27" class="sudokuCell sudokuRight"></td>
+                <td id="sc37" class="sudokuCell"></td>
+                <td id="sc47" class="sudokuCell"></td>
+                <td id="sc57" class="sudokuCell sudokuRight"></td>
+                <td id="sc67" class="sudokuCell"></td>
+                <td id="sc77" class="sudokuCell"></td>
+                <td id="sc87" class="sudokuCell sudokuRight"></td>
+            </tr>
+            <tr>
+                <td id="sc08" class="sudokuCell sudokuLeft sudokuBottom"></td>
+                <td id="sc18" class="sudokuCell sudokuBottom"></td>
+                <td id="sc28" class="sudokuCell sudokuRight sudokuBottom"></td>
+                <td id="sc38" class="sudokuCell sudokuBottom"></td>
+                <td id="sc48" class="sudokuCell sudokuBottom"></td>
+                <td id="sc58" class="sudokuCell sudokuRight sudokuBottom"></td>
+                <td id="sc68" class="sudokuCell sudokuBottom"></td>
+                <td id="sc78" class="sudokuCell sudokuBottom"></td>
+                <td id="sc88" class="sudokuCell sudokuRight sudokuBottom"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h3>Load puzzle from websudoku.com</h3>
+        <form action="#" name="frmLoadPuzzle" id="frmLoadPuzzle">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownDifficulty" data-toggle="dropdown" aria-expanded="true">
+                        Puzzle Difficulty
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="liDifficultyMenu" class="dropdown-menu" role="menu" aria-labelledby="dropdownDifficulty">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#">Easy</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#">Medium</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#">Hard</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#">Evil</a></li>
+                    </ul>
+                </div>
+                <input type="text" id="txtDifficulty" class="form-control" placeholder="Select difficulty from the menu to the left.">
+            </div>
+            <br />
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">Puzzle Number</span>
+                <input type="text" id="txtPuzzleNumber" class="form-control" placeholder="Enter the puzzle number to retrieve." aria-describedby="sizing-addon2">
+            </div>
+            <br />
+            <span>
+                <div class="pull-left">
+                    <button class="btn btn-primary" type="button" id="loadPuzzleButton">Load Puzzle</button>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-primary" type="button" id="solvePuzzleButton">Solve Puzzle</button>
+                </div>
+            </span>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    
+    <!--
+    <div class="col-md-6">
+        <h3>Sample API call</h3>
+        <p id="api_test">This will change!</p>
+        <button id="testButton">Test API</button>
+    </div>
+        -->
+</div>
+
+@section scripts {
+    <script>
+        function loadGrid(strsrc) {
+            var strpos = 0;
+
+            for (i = 0; i < 9; i++) {
+                for (j = 0; j < 9; j++) {
+                    if (strsrc.substr(strpos, 1) != "0") {
+                        $("#sc" + j + i).text(strsrc.substr(strpos, 1));
+                    } else {
+                        $("#sc" + j + i).text("");
+                    }
+                    
+                    strpos++;
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            /*
+            $("#testButton").click(function (event) {
+                event.preventDefault();
+
+                $.get("http://localhost:52403/api/test/", "", function (data) {
+                    $("#api_test").html(data);
+                });
+            });
+            */
+
+            $('#liDifficultyMenu li').on('click', function () {
+                $('#txtDifficulty').val($(this).text());
+            });
+
+            $("#loadPuzzleButton").click(function (event) {
+                event.preventDefault();
+
+                if ($("#txtPuzzleNumber").val() == "" || $("#txtDifficulty").val() == "")
+                {
+                    alert("Please select a difficulty and enter a puzzle number.");
+                }
+                else
+                {
+                    $.get("http://solvesudoku.azurewebsites.net/api/loadpuzzle/" + $("#txtDifficulty").val() + "/" + $("#txtPuzzleNumber").val(), "", function (data) {
+                        loadGrid(data);
+                    });
+                }
+            });
+
+            $("#solvePuzzleButton").click(function (event) {
+                event.preventDefault();
+
+                if ($("#txtPuzzleNumber").val() == "" || $("#txtDifficulty").val() == "") {
+                    alert("Please select a difficulty and enter a puzzle number.");
+                }
+                else {
+                    $.get("http://solvesudoku.azurewebsites.net/api/solvepuzzle/" + $("#txtDifficulty").val() + "/" + $("#txtPuzzleNumber").val(), "", function (data) {
+                        loadGrid(data);
+                    });
+                }
+            });
+        });
+    </script>
+}
