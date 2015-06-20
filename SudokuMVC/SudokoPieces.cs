@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace SudokuMVC
 {
@@ -781,7 +782,6 @@ namespace SudokuMVC
 			
 			for (i = 0; i < 3; i++)
 			{
-				//strRow[i] = strItems[index, i];
 				strRow[i] = strItems[i, index];
 			}
 			
@@ -795,7 +795,6 @@ namespace SudokuMVC
 			
 			for (i = 0; i < 3; i++)
 			{
-				//strCol[i] = strItems[i, index];
 				strCol[i] = strItems[index, i];
 			}
 			
@@ -816,7 +815,19 @@ namespace SudokuMVC
 			}
 			return false;
 		}
-		
+
+        public bool HasDuplicate()
+        {
+            string[] strArr = strItems.Cast<string>().ToArray(); //flatten multidimensional array first
+            var duplicatesFound = strArr.GroupBy(x => x)
+                                        .Where(g => g.Count() > 1)
+                                        .Select(s => s)
+                                        .ToList();
+
+            if (duplicatesFound.Count() > 0) return true;
+            else return false;
+        }
+
 		public bool HasAll9()
 		{
 			string[] strNums = new string[9] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -908,7 +919,6 @@ namespace SudokuMVC
 	public class SudokoRow
 	{
 		private string[] strRow = new string[9];
-		//private Hashtable hashStickyNums = new Hashtable();
 		
 		public int intNumber = 0;
 		
@@ -939,60 +949,6 @@ namespace SudokuMVC
 			
 		}
 		
-        /*
-		public Hashtable GetSticky()
-		{
-			return hashStickyNums;
-		}
-		
-		public void UpdateSticky(string strAction, int index, string strVal)
-		{
-			switch (strAction)
-			{
-				case "a":
-					try
-					{
-						hashStickyNums.Remove(index);
-					}
-					catch (Exception)
-					{
-						//DO NOTHING - JUST MOVE ON
-					}
-					hashStickyNums.Add(index, strVal);
-					break;
-				case "di":
-					hashStickyNums.Remove(index);
-					break;
-				case "dv":
-					if (hashStickyNums.ContainsValue(strVal))
-					{
-						for (int i = 0; i < hashStickyNums.Keys.Count; i++)
-						{
-							if (hashStickyNums[i].ToString() == strVal)
-							{
-								hashStickyNums.Remove(i);
-							}
-						}
-					}
-					break;
-				default:
-					break;
-			}
-		}
-		
-		public bool HasNumberInSticky(string strNum)
-		{
-			bool boolRet = false;
-			
-			if (hashStickyNums.ContainsValue(strNum))
-			{
-				boolRet = true;
-			}
-			
-			return boolRet;
-		}
-         */
-		
 		public bool HasNumber(string strNum)
 		{
 			for (int i = 0; i < 9; i++)
@@ -1004,7 +960,18 @@ namespace SudokuMVC
 			}
 			return false;
 		}
-		
+
+        public bool HasDuplicate()
+        {
+            var duplicatesFound = strRow.GroupBy(x => x)
+                                        .Where(g => g.Count() > 1)
+                                        .Select(s => s)
+                                        .ToList();
+
+            if (duplicatesFound.Count() > 0) return true;
+            else return false;
+        }
+
 		public bool HasAll9()
 		{
 			string[] strNums = new string[9] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -1056,8 +1023,6 @@ namespace SudokuMVC
 	public class SudokoCol
 	{
 		private string[] strCol = new string[9];
-		//private Hashtable hashStickyNums = new Hashtable();
-	
 		
 		public int intNumber = 0;
 		
@@ -1088,60 +1053,6 @@ namespace SudokuMVC
 			
 		}
 		
-        /*
-		public Hashtable GetSticky()
-		{
-			return hashStickyNums;
-		}
-		
-		public void UpdateSticky(string strAction, int index, string strVal)
-		{
-			switch (strAction)
-			{
-				case "a":
-					try
-					{
-						hashStickyNums.Remove(index);
-					}
-					catch (Exception)
-					{
-						//DO NOTHING - JUST MOVE ON
-					}
-					hashStickyNums.Add(index, strVal);
-					break;
-				case "di":
-					hashStickyNums.Remove(index);
-					break;
-				case "dv":
-					if (hashStickyNums.ContainsValue(strVal))
-					{
-						for (int i = 0; i < hashStickyNums.Keys.Count; i++)
-						{
-							if (hashStickyNums[i].ToString() == strVal)
-							{
-								hashStickyNums.Remove(i);
-							}
-						}
-					}
-					break;
-				default:
-					break;
-			}
-		}
-		
-		public bool HasNumberInSticky(string strNum)
-		{
-			bool boolRet = false;
-			
-			if (hashStickyNums.ContainsValue(strNum))
-			{
-				boolRet = true;
-			}
-			
-			return boolRet;
-		}
-         */
-		
 		public bool HasNumber(string strNum)
 		{
 			for (int i = 0; i < 9; i++)
@@ -1153,7 +1064,18 @@ namespace SudokuMVC
 			}
 			return false;
 		}
-		
+        
+        public bool HasDuplicate()
+        {
+            var duplicatesFound = strCol.GroupBy(x => x)
+                                        .Where(g => g.Count() > 1)
+                                        .Select(s => s)
+                                        .ToList();
+
+            if (duplicatesFound.Count() > 0) return true;
+            else return false;
+        }
+
 		public bool HasAll9()
 		{
 			string[] strNums = new string[9] {"1", "2", "3", "4", "5", "6", "7", "8", "9"};

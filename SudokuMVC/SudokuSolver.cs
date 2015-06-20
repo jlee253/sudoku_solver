@@ -189,7 +189,6 @@ namespace SudokuMVC
                 {
                     for (k = 0; k < 3; k++) //row - x
                     {
-                        //txtGrid[i2, k, j].Text = Grid[i2, k, j];
                         temp[iCellBase[i2] + k + (j * 9)] = Grid[i2, k, j][0];
                     }
                 }
@@ -209,9 +208,9 @@ namespace SudokuMVC
                 SudokoCol sc1 = null;
                 SudokoCol sc2 = null;
                 SudokoCol sc3 = null;
-                //Hashtable hashStickyTmp = null;
                 int i, j, k = 0;
 
+                #region //Set rows and columns
                 switch (sCell.strNumber)
                 {
                     case "0":
@@ -296,6 +295,7 @@ namespace SudokuMVC
                         sc3 = sGrid.GetCol(8);
                         break;
                 }
+                #endregion
 
                 SudokoCell sCellTemp = null;
                 string strTmpNum = "";
@@ -325,14 +325,7 @@ namespace SudokuMVC
                         }
                     }
 
-                    //PUT CODE HERE TO HANDLE STICKY NUMBERS
-                    //STICKY NUMBERS ARE NUMBERS WHERE YOU KNOW THEIR COL OR ROW, BUT NOT
-                    //EXACT BOXES.  !!! CODE ENDED UP IN COL AND ROW CHECKS !!!
-                    //APPLY STICKY
-
-                    //END STICKY
-
-                    //CHECK ROWS FOR NUMBER
+                    #region //CHECK ROWS FOR NUMBER
                     if (sr1.HasNumber(strTmpNum))
                     {
                         sCellTemp.SetValue(0, 0, "X");
@@ -378,7 +371,7 @@ namespace SudokuMVC
                         sCellTemp.SetValue(2, 1, "X");
                         sCellTemp.SetValue(2, 2, "X");
                     }
-
+                    #endregion
 
                     //CHECK FOR HOW MANY EMPTY
                     for (j = 0; j < 3; j++) //col var
@@ -1085,7 +1078,6 @@ namespace SudokuMVC
                 {
                     for (int k = 0; k < 3; k++)
                     {
-                        //Grid[i, k, j] = txtGrid[i, k, j].Text;
                         if (tmpGrid[i, k, j] == "" || tmpGrid[i, k, j] == "0")
                         {
                             return false;
