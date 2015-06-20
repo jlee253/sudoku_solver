@@ -745,6 +745,7 @@ namespace SudokuMVC
                     }
                 }
 
+                /*
                 //IF WE MADE IT HERE THAN WE HAVE MORE THAN 1 SPOT OPEN
                 //FIRST IDENTIFY WHAT WERE MISSING
                 string strMissing = "";
@@ -980,6 +981,7 @@ namespace SudokuMVC
                         }
                     }
                 }
+                */
             }
 
             return "0";
@@ -1318,6 +1320,7 @@ namespace SudokuMVC
                     }
                 }
 
+                /*
                 //IF WE MADE IT HERE THAN WE HAVE MORE THAN 1 SPOT OPEN
                 //FIRST IDENTIFY WHAT WERE MISSING
                 string strMissing = "";
@@ -1553,6 +1556,7 @@ namespace SudokuMVC
                         }
                     }
                 } //END FOR
+                */
             }
 
             return "0";
