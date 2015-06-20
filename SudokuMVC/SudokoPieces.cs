@@ -908,7 +908,7 @@ namespace SudokuMVC
 	public class SudokoRow
 	{
 		private string[] strRow = new string[9];
-		private Hashtable hashStickyNums = new Hashtable();
+		//private Hashtable hashStickyNums = new Hashtable();
 		
 		public int intNumber = 0;
 		
@@ -939,6 +939,7 @@ namespace SudokuMVC
 			
 		}
 		
+        /*
 		public Hashtable GetSticky()
 		{
 			return hashStickyNums;
@@ -990,6 +991,7 @@ namespace SudokuMVC
 			
 			return boolRet;
 		}
+         */
 		
 		public bool HasNumber(string strNum)
 		{
@@ -1054,7 +1056,7 @@ namespace SudokuMVC
 	public class SudokoCol
 	{
 		private string[] strCol = new string[9];
-		private Hashtable hashStickyNums = new Hashtable();
+		//private Hashtable hashStickyNums = new Hashtable();
 	
 		
 		public int intNumber = 0;
@@ -1086,6 +1088,7 @@ namespace SudokuMVC
 			
 		}
 		
+        /*
 		public Hashtable GetSticky()
 		{
 			return hashStickyNums;
@@ -1137,6 +1140,7 @@ namespace SudokuMVC
 			
 			return boolRet;
 		}
+         */
 		
 		public bool HasNumber(string strNum)
 		{

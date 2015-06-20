@@ -445,6 +445,7 @@ namespace SudokuMVC
                         continue;
                     }
 
+                    //searching positions within the row
                     for (j = 0; j < 9; j++)
                     {
                         if (sRow.GetNumber(j) != "" && sRow.GetNumber(j) != null && sRow.GetNumber(j) != "0")
@@ -453,12 +454,7 @@ namespace SudokuMVC
                         }
                     }
 
-                    //k = sRow.GetPosition(strTempNum);
-                    //if (k != 0)
-                    //{
-                    //	sRowTemp.SetValue(k, "X");
-                    //}
-
+                    #region //Check if columns have this number
                     //if (sc0.HasNumber(strTempNum) && (sRow.GetNumber(0) == "" || sRow.GetNumber(0) == null))
                     if (sc0.HasNumber(strTempNum))
                     {
@@ -504,8 +500,9 @@ namespace SudokuMVC
                     {
                         sRowTemp.SetValue(8, "X");
                     }
+                    #endregion
 
-                    //PUT CODE HERE TO CHECK IF A CELL HAS A NUMBER
+                    #region //CHECK IF A CELL HAS A NUMBER
                     switch (sRow.intNumber)
                     {
                         case 0:
@@ -718,7 +715,9 @@ namespace SudokuMVC
                         default:
                             break;
                     }
+                    #endregion
 
+                    //How many numbers are we missing
                     for (j = 0; j < 9; j++)
                     {
                         if (sRowTemp.GetNumber(j) == "" || sRowTemp.GetNumber(j) == null)
@@ -727,6 +726,7 @@ namespace SudokuMVC
                         }
                     }
 
+                    //If there is just 1, update it.
                     if (cnt == 1)
                     {
                         for (j = 0; j < 9; j++)
@@ -734,254 +734,12 @@ namespace SudokuMVC
                             if (sRowTemp.GetNumber(j) == "" || sRowTemp.GetNumber(j) == null)
                             {
                                 //sRow.SetValue(i, strTempNum);
-                                if (sRow.HasNumberInSticky(strTempNum))
-                                {
-                                    sRow.UpdateSticky("dv", i, strTempNum);
-                                }
                                 sGrid.SetRowValue(sRow, j, strTempNum);
                                 return strTempNum;
                             }
                         }
                     }
                 }
-
-                /*
-                //IF WE MADE IT HERE THAN WE HAVE MORE THAN 1 SPOT OPEN
-                //FIRST IDENTIFY WHAT WERE MISSING
-                string strMissing = "";
-                for (j = 0; j < 9; j++)
-                {
-                    strTempNum = (j + 1).ToString();
-                    if (!sRow.HasNumber(strTempNum))
-                    {
-                        strMissing += strTempNum;
-                    }
-                }
-
-                //CHECK EACH ROW.  IF A ROW HAS N-1 NUMMBERS THAN THIS EMPTY SPOT IS THE N-1 NUMBER
-                string strMissingTmp = "";
-                SudokoCol srTmp = null;
-
-                for (i = 0; i < 9; i++) //FOR LOOP TO MOVE UP ROW POSISITIONS
-                {
-                    switch (sRow.intNumber)
-                    {
-                        case 0:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(0);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(1);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(2);
-                            }
-
-                            break;
-                        case 1:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(0);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(1);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(2);
-                            }
-
-                            break;
-                        case 2:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(0);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(1);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(2);
-                            }
-
-                            break;
-                        case 3:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(3);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(4);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(5);
-                            }
-
-                            break;
-                        case 4:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(3);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(4);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(5);
-                            }
-
-                            break;
-                        case 5:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(3);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(4);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(5);
-                            }
-
-                            break;
-                        case 6:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(6);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(7);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(8);
-                            }
-
-                            break;
-                        case 7:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(6);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(7);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(8);
-                            }
-
-                            break;
-                        case 8:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(6);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(7);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(8);
-                            }
-
-                            break;
-                        default:
-                            break;
-                    }
-
-                    switch (i)
-                    {
-                        case 0:
-                            srTmp = sc0;
-                            break;
-                        case 1:
-                            srTmp = sc1;
-                            break;
-                        case 2:
-                            srTmp = sc2;
-                            break;
-                        case 3:
-                            srTmp = sc3;
-                            break;
-                        case 4:
-                            srTmp = sc4;
-                            break;
-                        case 5:
-                            srTmp = sc5;
-                            break;
-                        case 6:
-                            srTmp = sc6;
-                            break;
-                        case 7:
-                            srTmp = sc7;
-                            break;
-                        case 8:
-                            srTmp = sc8;
-                            break;
-                        default:
-                            srTmp = null;
-                            break;
-                    }
-
-                    if (sRow.GetNumber(i) == "" || sRow.GetNumber(i) == null)
-                    {
-                        strMissingTmp = strMissing;
-                        for (j = 0; j < strMissing.Length; j++) //CHECK COL
-                        {
-                            if (srTmp.HasNumber(strMissing.Substring(j, 1)))
-                            {
-                                strMissingTmp = strMissingTmp.Replace(strMissing.Substring(j, 1), " "); //CLEAR NUMBER WITH A SPACE
-                            }
-                        }
-
-                        for (j = 0; j < strMissing.Length; j++) //CHECK CELL
-                        {
-                            if (scTmp.HasNumber(strMissing.Substring(j, 1)) && strMissing.Substring(j, 1) != " ")
-                            {
-                                strMissingTmp = strMissingTmp.Replace(strMissing.Substring(j, 1), " "); //CLEAR NUMBER WITH A SPACE
-                            }
-                        }
-
-                        if (strMissingTmp.Trim().Length == 1) //FOUND YOU
-                        {
-                            if (sRow.HasNumberInSticky(strMissingTmp.Trim()))
-                            {
-                                //sRow.UpdateSticky("dv", i, strMissingTmp.Trim());
-                            }
-                            sGrid.SetRowValue(sRow, i, strMissingTmp.Trim());
-                            return strTempNum;
-                        }
-                        else
-                        {
-                            strMissingTmp = strMissingTmp.Replace(" ", "");
-                            for (j = 0; j < strMissingTmp.Length; j++)
-                            {
-                                //if (sRow.HasNumberInSticky(strMissingTmp.Substring(j, 1)))
-                                //{
-                                //continue;
-                                //}
-                                //sRow.UpdateSticky("a", i, strMissingTmp.Substring(j, 1));
-                            }
-                        }
-                    }
-                }
-                */
             }
 
             return "0";
@@ -1018,6 +776,7 @@ namespace SudokuMVC
                         continue;
                     }
 
+                    //searching positions within the column
                     for (j = 0; j < 9; j++)
                     {
                         if (sCol.GetNumber(j) != "" && sCol.GetNumber(j) != null && sCol.GetNumber(j) != "0")
@@ -1027,12 +786,7 @@ namespace SudokuMVC
                     }
 
 
-                    //k = sCol.GetPosition(strTempNum);
-                    //if (k != 0)
-                    //{
-                    //sColTemp.SetValue(k, "X");
-                    //}
-
+                    #region //Check if rows have this number
                     //if (sr0.HasNumber(strTempNum) && (sCol.GetNumber(0) == "" || sCol.GetNumber(0) == null))
                     if (sr0.HasNumber(strTempNum))
                     {
@@ -1078,9 +832,9 @@ namespace SudokuMVC
                     {
                         sColTemp.SetValue(8, "X");
                     }
+                    #endregion
 
-                    //PUT CODE HERE TO CHECK IF A CELL HAS A NUMBER
-
+                    #region //CHECK IF A CELL HAS A NUMBER
                     switch (sCol.intNumber)
                     {
                         case 0:
@@ -1293,7 +1047,9 @@ namespace SudokuMVC
                         default:
                             break;
                     }
+                    #endregion
 
+                    //How many numbers are we missing
                     for (j = 0; j < 9; j++)
                     {
                         if (sColTemp.GetNumber(j) == "" || sColTemp.GetNumber(j) == null)
@@ -1302,261 +1058,20 @@ namespace SudokuMVC
                         }
                     }
 
+                    //If there is just 1, update it
                     if (cnt == 1)
                     {
                         for (j = 0; j < 9; j++)
                         {
                             if (sColTemp.GetNumber(j) == "" || sColTemp.GetNumber(j) == null)
                             {
-                                sCol.SetValue(i, strTempNum);
-                                //if (sCol.HasNumberInSticky(strTempNum))
-                                //{
-                                //sCol.UpdateSticky("dv", i, strTempNum);
-                                //}
+                                //sCol.SetValue(i, strTempNum);
                                 sGrid.SetColValue(sCol, j, strTempNum);
                                 return strTempNum;
                             }
                         }
                     }
                 }
-
-                /*
-                //IF WE MADE IT HERE THAN WE HAVE MORE THAN 1 SPOT OPEN
-                //FIRST IDENTIFY WHAT WERE MISSING
-                string strMissing = "";
-                for (j = 0; j < 9; j++)
-                {
-                    strTempNum = (j + 1).ToString();
-                    if (!sCol.HasNumber(strTempNum))
-                    {
-                        strMissing += strTempNum;
-                    }
-                }
-
-                //CHECK EACH ROW.  IF A ROW HAS N-1 NUMMBERS THAN THIS EMPTY SPOT IS THE N-1 NUMBER
-                string strMissingTmp = "";
-                SudokoRow srTmp = null;
-
-                for (i = 0; i < 9; i++) //FOR LOOP TO MOVE UP COL POSISITIONS
-                {
-                    switch (sCol.intNumber)
-                    {
-                        case 0:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(0);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(3);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(6);
-                            }
-
-                            break;
-                        case 1:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(0);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(3);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(6);
-                            }
-
-                            break;
-                        case 2:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(0);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(3);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(6);
-                            }
-
-                            break;
-                        case 3:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(1);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(4);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(7);
-                            }
-
-                            break;
-                        case 4:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(1);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(4);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(7);
-                            }
-
-                            break;
-                        case 5:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(1);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(4);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(7);
-                            }
-
-                            break;
-                        case 6:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(2);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(5);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(8);
-                            }
-
-                            break;
-                        case 7:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(2);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(5);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(8);
-                            }
-
-                            break;
-                        case 8:
-                            if (i >= 0 && i <= 2)
-                            {
-                                scTmp = sGrid.GetCell(2);
-                            }
-                            if (i >= 3 && i <= 5)
-                            {
-                                scTmp = sGrid.GetCell(5);
-                            }
-                            if (i >= 6 && i <= 8)
-                            {
-                                scTmp = sGrid.GetCell(8);
-                            }
-
-                            break;
-                        default:
-                            break;
-                    }
-
-                    switch (i)
-                    {
-                        case 0:
-                            srTmp = sr0;
-                            break;
-                        case 1:
-                            srTmp = sr1;
-                            break;
-                        case 2:
-                            srTmp = sr2;
-                            break;
-                        case 3:
-                            srTmp = sr3;
-                            break;
-                        case 4:
-                            srTmp = sr4;
-                            break;
-                        case 5:
-                            srTmp = sr5;
-                            break;
-                        case 6:
-                            srTmp = sr6;
-                            break;
-                        case 7:
-                            srTmp = sr7;
-                            break;
-                        case 8:
-                            srTmp = sr8;
-                            break;
-                        default:
-                            srTmp = null;
-                            break;
-                    }
-
-                    if (sCol.GetNumber(i) == "" || sCol.GetNumber(i) == null)
-                    {
-                        strMissingTmp = strMissing;
-                        for (j = 0; j < strMissing.Length; j++) //CHECK ROW
-                        {
-                            if (srTmp.HasNumber(strMissing.Substring(j, 1)))
-                            {
-                                strMissingTmp = strMissingTmp.Replace(strMissing.Substring(j, 1), " "); //CLEAR NUMBER WITH A SPACE
-                            }
-                        }
-
-                        for (j = 0; j < strMissing.Length; j++) //CHECK CELL
-                        {
-                            if (scTmp.HasNumber(strMissing.Substring(j, 1)) && strMissing.Substring(j, 1) != " ")
-                            {
-                                strMissingTmp = strMissingTmp.Replace(strMissing.Substring(j, 1), " "); //CLEAR NUMBER WITH A SPACE
-                            }
-                        }
-
-                        if (strMissingTmp.Trim().Length == 1) //FOUND YOU
-                        {
-                            //if (sCol.HasNumberInSticky(strMissingTmp.Trim()))
-                            //{
-                            //sCol.UpdateSticky("dv", i, strMissingTmp.Trim());
-                            //}
-                            sGrid.SetColValue(sCol, i, strMissingTmp.Trim());
-                            return strTempNum;
-                        }
-                        else
-                        {
-                            strMissingTmp = strMissingTmp.Replace(" ", "");
-                            for (j = 0; j < strMissingTmp.Length; j++)
-                            {
-                                //if (sCol.HasNumberInSticky(strMissingTmp.Substring(j, 1)))
-                                //{
-                                //continue;
-                                //}
-                                //sCol.UpdateSticky("a", i, strMissingTmp.Substring(j, 1));
-                            }
-                        }
-                    }
-                } //END FOR
-                */
             }
 
             return "0";
